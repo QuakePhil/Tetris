@@ -10,7 +10,7 @@ is evaluation correct?
 #include <stdio.h>
 #include "data.h"
 #include "misc.h"
-#include "logic.h"
+#include "field.h"
 #include "evaluate.h"
 #include "moves.h"
 #include "think.h"
