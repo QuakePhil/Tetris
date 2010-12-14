@@ -2,6 +2,18 @@
 #define ROWS 15
 #define COLSROWS 150
 
+// Scoring
+
+int pieces_dropped;
+int lines_cleared;
+
+// Future piece memory
+
+#define MEMORY_SIZE 3
+int memory[MEMORY_SIZE] = {0, 0, 0};
+int memory_place = 0;
+
+// Piece bits
 // T L J I O S Z
 
 int field[COLSROWS];
@@ -132,4 +144,3 @@ int pieces[PIECES] = {
 	0,7,0,0,	7,7,0,0,	7,0,0,0,	0,0,0,2,
 
 };
-

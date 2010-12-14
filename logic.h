@@ -54,7 +54,7 @@ int collide_piece(int *piece, int row)
 	return 0;
 	}
 
-void draw_piece(int *piece, int row)
+int draw_piece(int *piece, int row)
 	{
 	int i;
 	int subrow = 0;
@@ -65,6 +65,6 @@ void draw_piece(int *piece, int row)
 		if (i % 4 == 3) subrow += (COLS - 4);
 		}
 
-	clear_lines();
+	return clear_lines();
 	}
 

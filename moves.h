@@ -55,5 +55,3 @@ int move_sort(const void * a, const void * b)
 	{
 	return ((MOVE*)a)->value < ((MOVE*)b)->value;
 	}
-
-int last_piece = 0;
