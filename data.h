@@ -9,9 +9,22 @@ int lines_cleared;
 
 // Future piece memory
 
-#define MEMORY_SIZE 3
-int memory[MEMORY_SIZE] = {0, 0, 0};
+#define MEMORY_SIZE 1 // segfaults with 3 so something is broken :(
+// (although valgrind doesn't find anything...?)
+int memory[MEMORY_SIZE] = {0};
 int memory_place = 0;
+
+// Moves
+
+typedef struct
+	{
+	int* piece;
+	int i;
+	int value;
+	}
+MOVE;
+MOVE moves[8][64];
+int move_counter[8];
 
 // Piece bits
 // T L J I O S Z
@@ -24,6 +37,9 @@ int chars[8] = {'.', 'T', 'L', 'J', 'I', 'O', 'S', 'Z'};
 #define PIECE_BITS 16
 #define PIECES 7*ROTATIONS_PER_PIECE*PIECE_BITS
 
+// on second thought, there is probably no good reason
+// not to do this as a multi-dimensional array, but oh
+// well, too late now :p
 int pieces[PIECES] = {
 // T
 	1,1,1,0,

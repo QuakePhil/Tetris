@@ -1,21 +1,18 @@
-typedef struct
+int move_sort(const void * a, const void * b)
 	{
-	int* piece;
-	int i;
-	int value;
+	return ((MOVE*)a)->value < ((MOVE*)b)->value;
 	}
-MOVE;
-MOVE moves[8][64];
-int move_counter[8];
 
-void generate_moves(int piece_id, int depth)
+int generate_moves(int piece_id, int piece_memory_place, int depth)
 	{
-	int * piece = &pieces[piece_id * ROTATIONS_PER_PIECE * PIECE_BITS];
+	int* piece = &pieces[piece_id * ROTATIONS_PER_PIECE * PIECE_BITS];
 
 	int rotation;
 
 	int i;
 	int col;
+
+	int best_value_here;
 
 	move_counter[depth] = 0;
 
@@ -38,20 +35,24 @@ restore_field();*/
 					break;
 				}
 
-			save_field();
+			save_field(depth);
 			draw_piece(piece + rotation, i - COLS);
 
 			moves[depth][move_counter[depth]].piece = piece + rotation;
 			moves[depth][move_counter[depth]].i = i - COLS;
-			moves[depth][move_counter[depth]].value = evaluate();
+			if (depth == MEMORY_SIZE)
+				moves[depth][move_counter[depth]].value = evaluate();
+			else
+				moves[depth][move_counter[depth]].value = generate_moves(
+					memory[(piece_memory_place+depth+1)%3]
+					, piece_memory_place
+					, depth + 1);
 			move_counter[depth]++;
 
-			restore_field();
+			restore_field(depth);
 			}
 		}
-	}
 
-int move_sort(const void * a, const void * b)
-	{
-	return ((MOVE*)a)->value < ((MOVE*)b)->value;
+	qsort(moves[depth], move_counter[depth], sizeof(MOVE), move_sort);
+	return moves[depth][0].value;
 	}

@@ -36,18 +36,18 @@ void display()
 	}
 
 /* just to be able to undo moves */
-int saved_field[COLSROWS];
-inline void save_field()
+int saved_field[MEMORY_SIZE][COLSROWS];
+inline void save_field(int depth)
 	{
 	int i;
 	for (i = 0; i < COLSROWS; ++i)
-		saved_field[i] = field[i];
+		saved_field[depth][i] = field[i];
 	}
-inline void restore_field()
+inline void restore_field(int depth)
 	{
 	int i;
 	for (i = 0; i < COLSROWS; ++i)
-		field[i] = saved_field[i];
+		field[i] = saved_field[depth][i];
 	}
 
 /* other helpers */
@@ -60,6 +60,7 @@ void hmm()
 
 void new_game()
 	{
+	srand(time());
 	int i;
 	pieces_dropped =
 	lines_cleared = 0;
@@ -69,3 +70,13 @@ void new_game()
 		field[i] = 0;
 	}
 
+void print_moves(int depth)
+	{
+	int i;
+	for (i = 0; i < move_counter[depth]; ++i)
+		{
+		printf("move #%d at depth %d from col %d value %d\n", i, depth
+			, moves[depth][i].i
+			, moves[depth][i].value);
+		}
+	}
