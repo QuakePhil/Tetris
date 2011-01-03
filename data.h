@@ -1,17 +1,24 @@
-#define COLS 10
-#define ROWS 15
-#define COLSROWS 150
+// #define DRAW_PIECE_DROPPING
+
+// #define PIECE_OVERRIDE 5
+
+#define INTERACTIVE_PAUSES
+
+#define COLS 15
+#define ROWS 20
+#define COLSROWS 300
 
 // Scoring
 
 int pieces_dropped;
 int lines_cleared;
+int column_height[COLS];
 
 // Future piece memory
 
-#define MEMORY_SIZE 1 // segfaults with 3 so something is broken :(
+#define MEMORY_SIZE 2 // segfaults with 3 so something is broken :(
 // (although valgrind doesn't find anything...?)
-int memory[MEMORY_SIZE] = {0};
+int memory[MEMORY_SIZE] = {0, 0};
 int memory_place = 0;
 
 // Moves

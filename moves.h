@@ -1,10 +1,7 @@
-int move_sort(const void * a, const void * b)
-	{
-	return ((MOVE*)a)->value < ((MOVE*)b)->value;
-	}
-
 int generate_moves(int piece_id, int piece_memory_place, int depth)
 	{
+//printf("generate_moves(piece_memory_place = %d, depth = %d\n", piece_memory_place, depth);
+//hmm();
 	int* piece = &pieces[piece_id * ROTATIONS_PER_PIECE * PIECE_BITS];
 
 	int rotation;
@@ -24,7 +21,8 @@ int generate_moves(int piece_id, int piece_memory_place, int depth)
 			{
 			for (i = col; i < COLSROWS; i += COLS)
 				{
-/*save_field();
+/*
+save_field();
 printf("dropping a piece....\n");
 printf("dropping a piece....\n");
 draw_piece(piece + rotation, i);
@@ -40,7 +38,7 @@ restore_field();*/
 
 			moves[depth][move_counter[depth]].piece = piece + rotation;
 			moves[depth][move_counter[depth]].i = i - COLS;
-			if (depth == MEMORY_SIZE)
+			if (depth == MEMORY_SIZE || 1)
 				moves[depth][move_counter[depth]].value = evaluate();
 			else
 				moves[depth][move_counter[depth]].value = generate_moves(
@@ -48,7 +46,6 @@ restore_field();*/
 					, piece_memory_place
 					, depth + 1);
 			move_counter[depth]++;
-
 			restore_field(depth);
 			}
 		}
