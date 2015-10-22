@@ -174,5 +174,5 @@ void print_moves(int depth)
 
 int move_sort(const void * a, const void * b)
 	{
-	return ((MOVE*)a)->value < ((MOVE*)b)->value;
+	return ((MOVE*)a)->value < ((MOVE*)b)->value ? 1 : -1;
 	}
