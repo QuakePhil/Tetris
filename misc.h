@@ -1,4 +1,7 @@
 /* just to be able to undo moves */
+int collide_piece(int *, int);
+int draw_piece(int *, int);
+int evaluate();
 int saved_field[MEMORY_SIZE][COLSROWS];
 inline void save_field(int depth)
 	{

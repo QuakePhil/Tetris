@@ -1,2 +1,2 @@
 #!/bin/sh
-gcc -O9 tetris.c -o tetris
+g++ -O9 tetris.c -o tetris
